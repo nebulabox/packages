@@ -57,25 +57,25 @@ define Package/bind-libs
   URL:=https://www.isc.org/software/bind
 endef
 
-define Package/bind-server
-  $(call Package/bind/Default)
-  TITLE+= DNS server
-endef
+# define Package/bind-server
+#   $(call Package/bind/Default)
+#   TITLE+= DNS server
+# endef
 
-define Package/bind-server/config
-	source "$(SOURCE)/Config.in"
-endef
+# define Package/bind-server/config
+# 	source "$(SOURCE)/Config.in"
+# endef
 
-define Package/bind-server-filter-aaaa
-  $(call Package/bind-server)
-  DEPENDS:=bind-server
-  TITLE+= filter AAAA plugin
-endef
+# define Package/bind-server-filter-aaaa
+#   $(call Package/bind-server)
+#   DEPENDS:=bind-server
+#   TITLE+= filter AAAA plugin
+# endef
 
-define Package/bind-client
-  $(call Package/bind/Default)
-  TITLE+= dynamic DNS client
-endef
+# define Package/bind-client
+#   $(call Package/bind/Default)
+#   TITLE+= dynamic DNS client
+# endef
 
 define Package/bind-tools
   $(call Package/bind/Default)
@@ -128,12 +128,14 @@ TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
 CONFIGURE_ARGS += \
 	--disable-linux-caps \
 	--with-openssl="$(STAGING_DIR)/usr" \
-	--with-libtool \
 	--without-lmdb \
 	--enable-epoll \
 	--without-gssapi \
 	--without-readline \
 	--without-python \
+	--disable-backtrace \
+	--disable-symtable \
+	--with-pic \
 	--sysconfdir=/etc/bind
 
 ifdef CONFIG_BIND_LIBJSON
@@ -248,9 +250,9 @@ define Package/bind-nslookup/install
 endef
 
 $(eval $(call BuildPackage,bind-libs))
-$(eval $(call BuildPackage,bind-server))
-$(eval $(call BuildPackage,bind-server-filter-aaaa))
-$(eval $(call BuildPackage,bind-client))
+# $(eval $(call BuildPackage,bind-server))
+# $(eval $(call BuildPackage,bind-server-filter-aaaa))
+# $(eval $(call BuildPackage,bind-client))
 $(eval $(call BuildPackage,bind-tools))
 $(eval $(call BuildPackage,bind-rndc))
 $(eval $(call BuildPackage,bind-check))
