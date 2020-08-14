@@ -77,37 +77,37 @@ endef
 #   TITLE+= dynamic DNS client
 # endef
 
-define Package/bind-tools
-  $(call Package/bind/Default)
-  TITLE+= administration tools (all)
-	DEPENDS:= \
-	+bind-check \
-	+bind-dig \
-	+bind-nslookup \
-	+bind-dnssec \
-	+bind-host \
-	+bind-rndc
-endef
+# define Package/bind-tools
+#   $(call Package/bind/Default)
+#   TITLE+= administration tools (all)
+# 	DEPENDS:= \
+# 	+bind-check \
+# 	+bind-dig \
+# 	+bind-nslookup \
+# 	+bind-dnssec \
+# 	+bind-host \
+# 	+bind-rndc
+# endef
 
-define Package/bind-rndc
-  $(call Package/bind/Default)
-  TITLE+= administration tools (rndc and rndc-confgen only)
-endef
+# define Package/bind-rndc
+#   $(call Package/bind/Default)
+#   TITLE+= administration tools (rndc and rndc-confgen only)
+# endef
 
-define Package/bind-check
-  $(call Package/bind/Default)
-  TITLE+= administration tools (named-checkconf and named-checkzone only)
-endef
+# define Package/bind-check
+#   $(call Package/bind/Default)
+#   TITLE+= administration tools (named-checkconf and named-checkzone only)
+# endef
 
-define Package/bind-dnssec
-  $(call Package/bind/Default)
-  TITLE+= administration tools (dnssec-keygen, dnssec-settime and dnssec-signzone only)
-endef
+# define Package/bind-dnssec
+#   $(call Package/bind/Default)
+#   TITLE+= administration tools (dnssec-keygen, dnssec-settime and dnssec-signzone only)
+# endef
 
-define Package/bind-host
-  $(call Package/bind/Default)
-  TITLE+= simple DNS client
-endef
+# define Package/bind-host
+#   $(call Package/bind/Default)
+#   TITLE+= simple DNS client
+# endef
 
 define Package/bind-dig
   $(call Package/bind/Default)
@@ -170,74 +170,74 @@ endef
 
 define Package/bind-libs/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/*.so* $(1)/usr/lib
+	# $(CP) $(PKG_INSTALL_DIR)/usr/lib/*.so* $(1)/usr/lib
 endef
 
-define Package/bind-server/install
-	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/named $(1)/usr/sbin/
-	$(INSTALL_DIR) $(1)/etc/bind
-	$(CP) \
-		./files/bind/db.0 \
-		./files/bind/db.127 \
-		./files/bind/db.255 \
-		./files/bind/db.local \
-		./files/bind/db.root \
-		./files/bind/bind.keys \
-		$(1)/etc/bind/
-	$(CP) ./files/bind/named.conf.example $(1)/etc/bind/named.conf
-	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/named.init $(1)/etc/init.d/named
-	find $(1)/etc/bind/ -name ".svn" | xargs rm -rf
-endef
+# define Package/bind-server/install
+# 	$(INSTALL_DIR) $(1)/usr/sbin
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/named $(1)/usr/sbin/
+# 	$(INSTALL_DIR) $(1)/etc/bind
+# 	$(CP) \
+# 		./files/bind/db.0 \
+# 		./files/bind/db.127 \
+# 		./files/bind/db.255 \
+# 		./files/bind/db.local \
+# 		./files/bind/db.root \
+# 		./files/bind/bind.keys \
+# 		$(1)/etc/bind/
+# 	$(CP) ./files/bind/named.conf.example $(1)/etc/bind/named.conf
+# 	$(INSTALL_DIR) $(1)/etc/init.d
+# 	$(INSTALL_BIN) ./files/named.init $(1)/etc/init.d/named
+# 	find $(1)/etc/bind/ -name ".svn" | xargs rm -rf
+# endef
 
-define Package/bind-server/conffiles
-/etc/bind/db.0
-/etc/bind/db.127
-/etc/bind/db.255
-/etc/bind/db.local
-/etc/bind/db.root
-/etc/bind/named.conf
-endef
+# define Package/bind-server/conffiles
+# /etc/bind/db.0
+# /etc/bind/db.127
+# /etc/bind/db.255
+# /etc/bind/db.local
+# /etc/bind/db.root
+# /etc/bind/named.conf
+# endef
 
-define Package/bind-server-filter-aaaa/install
-	$(INSTALL_DIR) $(1)/usr/lib/named
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/named/filter-aaaa.so $(1)/usr/lib/named
-endef
+# define Package/bind-server-filter-aaaa/install
+# 	$(INSTALL_DIR) $(1)/usr/lib/named
+# 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/named/filter-aaaa.so $(1)/usr/lib/named
+# endef
 
-define Package/bind-client/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/nsupdate $(1)/usr/bin/
-endef
+# define Package/bind-client/install
+# 	$(INSTALL_DIR) $(1)/usr/bin
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/nsupdate $(1)/usr/bin/
+# endef
 
-define Package/bind-tools/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/delv $(1)/usr/bin/
-endef
+# define Package/bind-tools/install
+# 	$(INSTALL_DIR) $(1)/usr/bin
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/delv $(1)/usr/bin/
+# endef
 
-define Package/bind-rndc/install
-	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/rndc $(1)/usr/sbin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/rndc-confgen $(1)/usr/sbin/
-endef
+# define Package/bind-rndc/install
+# 	$(INSTALL_DIR) $(1)/usr/sbin
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/rndc $(1)/usr/sbin/
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/rndc-confgen $(1)/usr/sbin/
+# endef
 
-define Package/bind-check/install
-	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/named-checkconf $(1)/usr/sbin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/named-checkzone $(1)/usr/sbin/
-endef
+# define Package/bind-check/install
+# 	$(INSTALL_DIR) $(1)/usr/sbin
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/named-checkconf $(1)/usr/sbin/
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/named-checkzone $(1)/usr/sbin/
+# endef
 
-define Package/bind-dnssec/install
-	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/dnssec-keygen $(1)/usr/sbin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/dnssec-settime $(1)/usr/sbin/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/dnssec-signzone $(1)/usr/sbin/
-endef
+# define Package/bind-dnssec/install
+# 	$(INSTALL_DIR) $(1)/usr/sbin
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/dnssec-keygen $(1)/usr/sbin/
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/dnssec-settime $(1)/usr/sbin/
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/dnssec-signzone $(1)/usr/sbin/
+# endef
 
-define Package/bind-host/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/host $(1)/usr/bin/
-endef
+# define Package/bind-host/install
+# 	$(INSTALL_DIR) $(1)/usr/bin
+# 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/host $(1)/usr/bin/
+# endef
 
 define Package/bind-dig/install
 	$(INSTALL_DIR) $(1)/usr/bin
@@ -253,10 +253,10 @@ $(eval $(call BuildPackage,bind-libs))
 # $(eval $(call BuildPackage,bind-server))
 # $(eval $(call BuildPackage,bind-server-filter-aaaa))
 # $(eval $(call BuildPackage,bind-client))
-$(eval $(call BuildPackage,bind-tools))
-$(eval $(call BuildPackage,bind-rndc))
-$(eval $(call BuildPackage,bind-check))
-$(eval $(call BuildPackage,bind-dnssec))
-$(eval $(call BuildPackage,bind-host))
+# $(eval $(call BuildPackage,bind-tools))
+# $(eval $(call BuildPackage,bind-rndc))
+# $(eval $(call BuildPackage,bind-check))
+# $(eval $(call BuildPackage,bind-dnssec))
+# $(eval $(call BuildPackage,bind-host))
 $(eval $(call BuildPackage,bind-dig))
 $(eval $(call BuildPackage,bind-nslookup))
